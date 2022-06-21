@@ -1,0 +1,99 @@
+{% extends 'collection/collection_base.html' %}
+
+{% block content %}
+<hr>
+
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse1">
+    Show Account Information
+</button>
+<div class="collapse" id="collapse1">
+    <div class="card card-body">
+        Ac No: 2920202002 <br>
+        IFSC: ddie020202
+    </div>
+</div>
+
+<div class="row mb-3 ">
+    <div class="col align-center">
+        <a class="btn btn-success text-white" href="{% url 'collection_create' %}">Add</a>
+    </div>
+
+</div>
+<ul>
+    <!-- Iterate over object_list -->
+    <table class="table table-sm table-striped ">
+        <thead class="thead bg-success text-white">
+            <tr>
+                <th scope="col">Action</th>
+                <th scope="col">Name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+
+            <!-- Display Objects -->
+            <tr>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true">
+                            Action
+                        </button>
+                        <div class="dropdown-menu">
+
+                            <a class="dropdown-item" href="{% url 'collection_update' object.id %}"> Edit</a>
+                            <a class="dropdown-item del btn" data-toggle="modal" data-target="#delete_form"
+                                href="{% url 'collection_delete' object.id %}">
+                                Delete</a>
+
+                        </div>
+                    </div>
+
+                </td>
+                <td><a href="{% url 'collection_detail' object.id %}">{{ object.name }} </a></td>
+                <td>{{ object.amount }}
+
+
+                </td>
+                <td>
+                    {{object.date_created|date}}
+                </td>
+            </tr>
+
+
+            <!-- If object_list is empty -->
+            {% empty %}
+            <li>No objects yet.</li>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</ul>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete_form">
+    Launch demo modal
+</button>
+
+
+
+{% include 'collection/collection_confirm_delete.html' %}
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script>
+    $(function () {
+
+        $(".del").on('click', function (e) {
+            $("#frm_delete").attr('action', $(this).attr('href'))
+
+
+        })
+    })
+</script>
+{% endblock %}

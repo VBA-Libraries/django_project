@@ -1,0 +1,45 @@
+{% extends 'collection/collection_base.html' %}
+
+{% block content %}
+
+<div class="card" style="max-width: 30rem;">
+
+    <div class="card-header text-white bg-success">
+        Add Collection
+    </div>
+    <div class="card-body">
+        <form method="POST" enctype="multipart/form-data" novalidate>
+
+            <!-- Security token -->
+            {% csrf_token %}
+
+            <!-- Using the formset -->
+            <div class="form-group">
+                <label for="name">{{form.name.label}}</label>
+                <input type="text" value="{{form.name.value}}" name="{{form.name.html_name}}" placeholder="Enter Name"
+                    class="form-control" />
+                <div class="alert-danger">
+                    {{form.name.errors}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="amount"> {{form.amount.label}}</label>
+
+                <input type="text" value="{{form.amount.value}}" name="{{form.amount.html_name}}"
+                    placeholder="Enter amount" class="form-control" />
+                <small class="alert-light text-danger ">
+                    {{form.amount.errors}}
+                </small>
+
+            </div>
+            <div class="invalid-feedback">
+                {{ form.errors}}
+            </div>
+
+            <input class="btn btn-primary" type="submit" value="Submit">
+            <a class="btn btn-primary " href="{% url 'collection_list' %}">Back</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

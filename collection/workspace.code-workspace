@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "mnc",
+			"path": "../.."
+		},
+		{
+			"name": "rrb_mnc",
+			"path": "../../../../Downloads/rrb_mnc"
+		}
+	],
+	"settings": {}
+}

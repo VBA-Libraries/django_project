@@ -1,0 +1,27 @@
+{% extends "collection/collection_base.html" %}
+
+{% block content %}
+
+
+<div class="card" style="max-width: 18rem;">
+    <div class="card-header bg-success text-white mb-3">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#b1">
+            {{ object.name}}
+        </button>
+    </div>
+    <div id="b1" class="card-body collapse show">
+        <ul>
+
+            <li>
+                Amount: {{object.amount}}
+            </li>
+            <li>
+                Date: {{object.date_created}}
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+
+{% endblock %}

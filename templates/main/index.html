@@ -1,0 +1,194 @@
+{% load static %}
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Zatosh Nakamoto">
+  <meta name="generator" content="Image Website">
+  <title>RRB Mandir Nirman Committee, Gokila</title>
+
+  <link rel="canonical" href="#">
+
+    
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+
+  <!-- Custom styles for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'assets/css/blog.css' %}" rel="stylesheet">
+
+
+</head>
+
+<body>
+    
+  <header>
+    <div class="collapse bg-dark" id="navbarHeader">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-md-7 py-4">
+            <h4 class="text-white">About</h4>
+            <p class="text-white">The committee is created on 19th March, with only one mission to complete the Malthep which has been in ruins for last seven years. Let's join hands 🙏🙏🙏 and grab the opportunity to be part of the development of our Malthep.  
+                <br>
+                Malthep, a nijor contribution arre account agot diya habbiye miliya malthep ago abosor uba korik....
+
+                <br>
+            </p>
+            <p class="text-white">
+                Name: RRB Mandir Nirman Commitee
+                <br/>
+                A/No: 50220015099815
+                <br/>
+                IFSC: BDBL0001173
+            </p>
+         </div>
+         <div  class="col-sm-4 offset-md-1 py-4 ">
+            <h4 class="text-white">Admin</h4>
+            <ul class="list-unstyled">
+              <li><a href="/admin" class="text-white">Login</a></li>
+              <!--<li><a href="#" class="text-white">Like on Facebook</a></li>-->
+              <!--<li><a href="#" class="text-white">Email me</a></li>-->
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container">
+        <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center">
+         
+          <strong>Gokila</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+          aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    
+
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+      <div class="col-md-6 px-0">
+        <h1 class="display-4 fst-italic">Radha Raman Banerjee Mandir Nirman Committee, Gokila</h1>
+        <p class="lead my-3">Let's create history by building our Malthep together... 🙏🙏🙏</p>
+        <!--<p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>-->
+      </div>
+    </div>
+
+  </main>
+  <div class="container">
+
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+      {% if categories|length > 0 %}
+      {% for category in categories %}
+      <div class="col">
+        <div class="card shadow-sm">
+
+          <img style="width: 420px;" src="{{category.squareImage.url}}" alt="{{image.altText}}">
+
+          <div class="card-body">
+            <p class="card-text">{{category.shortDescription}} . . .
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a class="p-2 link-secondary" href="{% url 'image-category' category.slug %}">{{category.title}}
+                <button type="button"
+                        class="btn btn-sm btn-outline-secondary">Event Details...</button>
+                </a>
+              </div>
+              <small class="text-muted">{{category.date_created|date}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <h2>No Images Uploaded for this category</h2>
+      {% endif %}
+
+    </div>
+
+    <header class="blog-header py-3">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 pt-1">
+          <a class="link-secondary" href="#"></a>
+        </div>
+        <!-- <div class="col-4 text-center">
+          <a class="blog-header-logo text-dark" href="#">Radha Raman Banerjee Mandir Nirman Committee, Gokila</a>
+        </div> -->
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          <!-- <a class="link-secondary" href="#" aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
+              viewBox="0 0 24 24">
+              <title>Search</title>
+              <circle cx="10.5" cy="10.5" r="7.5" />
+              <path d="M21 21l-5.2-5.2" />
+            </svg>
+          </a> -->
+
+        </div>
+      </div>
+    </header>
+
+
+
+
+    <!-- <div class="nav-scroller py-1 mb-2">
+      <nav class="nav d-flex justify-content-between">
+
+        {% for category in categories %}
+        <img style="width: 400px;" src="{{category.squareImage.url}}" alt="{{category.altText}}">
+        <a class="p-2 link-secondary" href="{% url 'image-category' category.slug %}">{{category.title}}</a>
+        {% endfor %}
+
+      </nav>
+    </div> -->
+  </div>
+
+
+  <footer class="blog-footer">
+    <p>Developed & Maintained by <a href="#">Bhanu Sinha, RRB Mandir Nirman Committee</a>.</p>
+  </footer>
+
+
+  <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+
+
+
+</body>
+
+
+</html>

@@ -1,20 +1,29 @@
 from audioop import reverse
 from django.shortcuts import render
 
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView,DeleteView
 from .models import Expense
 from django.urls import reverse
 
 # Create your views here.
 
 
+class ExpenseDetailView(DetailView):
+    model = Expense
+
+class ExpenseDeleteView(DeleteView):
+    model= Expense
+
+    def get_success_url(self):
+        return reverse("expense_list")
+
 class ExpenseCreateView(CreateView):
     model = Expense
-    fields = ['item_name', 'item_category', 'item_amount', 'expense_date']
+    fields = ["item_name", "item_category", "item_amount", "expense_date"]
     template_name = "expense/expense_form.html"
 
     def get_success_url(self):
-        return reverse('expense_list')
+        return reverse("expense_list")
 
 
 class ExpenseListView(ListView):
@@ -24,8 +33,8 @@ class ExpenseListView(ListView):
 
 class ExpenseUpdateView(UpdateView):
     model = Expense
-    fields = ['item_name', 'item_category', 'item_amount', 'expense_date']
+    fields = ["item_name", "item_category", "item_amount", "expense_date"]
     template_name = "expense/expense_form.html"
 
     def get_success_url(self):
-        return reverse('expense_list')
+        return reverse("expense_list")

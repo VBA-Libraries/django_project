@@ -1,6 +1,12 @@
 from pyexpat import model
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    UpdateView,
+    DetailView,
+    DeleteView,
+)
 from .models import Collection
 from django.urls import reverse
 
@@ -9,11 +15,11 @@ from django.urls import reverse
 
 class CollectionCreateView(CreateView):
     model = Collection
-    fields = ['name', 'amount', 'date_created']
+    fields = ["name", "amount", "date_created"]
     template_name = "collection/collection_form.html"
 
     def get_success_url(self):
-        return reverse('collection_list')
+        return reverse("collection_list")
 
 
 class CollectionListView(ListView):
@@ -23,11 +29,11 @@ class CollectionListView(ListView):
 
 class CollectionUpdateView(UpdateView):
     model = Collection
-    template_name = 'collection/collection_form.html'
-    fields = ['name', 'amount', 'date_created']
+    template_name = "collection/collection_form.html"
+    fields = ["name", "amount", "date_created"]
 
     def get_success_url(self):
-        return reverse('collection_list')
+        return reverse("collection_list")
 
 
 class CollectionDetailView(DetailView):
@@ -39,4 +45,4 @@ class CollectionDeleteView(DeleteView):
     model = Collection
 
     def get_success_url(self):
-        return reverse('collection_list')
+        return reverse("collection_list")

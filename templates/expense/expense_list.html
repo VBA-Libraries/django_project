@@ -1,20 +1,79 @@
-<html>
+{% extends 'expense/expense_base.html' %}
 
-<body>
-    <ul>
-        <!-- Iterate over object_list -->
-        {% for object in object_list %}
-        <!-- Display Objects -->
-        <li>{{ object.item_name }}</li>
-        <li>{{ object.item_category }}</li>
+{% block content %}
 
-        <hr />
-        <!-- If object_list is empty -->
-        {% empty %}
-        <li>No objects yet.</li>
-        {% endfor %}
-    </ul>
+<div class="row mb-3">
+    <div class="col">
+        <a href="{% url 'expense_create' %}" class="btn btn-primary text-white">Add</a>
+    </div>
+</div>
 
-</body>
+<ul>
+    <table class="table table-sm table-striped">
+        <thead class="thead bg-success text-white">
+            <tr>
+                <th scope="col">Action</th>
+                <th scope="col">Item</th>
+                <th scope="col">Category</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
 
-</html>
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in object_list %}
+
+            <!-- Display Objects -->
+            <tr>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true">
+                            Action
+                        </button>
+                        <div class="dropdown-menu">
+
+                            <a class="dropdown-item" href="{% url 'expense_update' object.id %}"> Edit</a>
+                            <a class="dropdown-item del btn" data-toggle="modal" data-target="#delete_form2"
+                                href="{% url 'expense_delete' object.id %}">
+                                Delete</a>
+
+                        </div>
+                    </div>
+
+                </td>
+                <td><a href="{% url 'expense_detail' object.id %}">{{ object.item_name }} </a></td>
+                <td>{{ object.item_category }} </td>
+                <td>{{ object.item_amount }}</td>
+                <td>
+                    {{object.expense_date|date}}
+                </td>
+            </tr>
+
+
+            <!-- If object_list is empty -->
+            {% empty %}
+            <li>No objects yet.</li>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</ul>
+{% include 'expense/expense_confirm_delete.html' %}
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+    // alert("working");
+    $(function () {
+
+        $(".del").on('click', function () {
+            // alert("working");
+            $("#frm_delete2").attr('action', $(this).attr('href'))
+
+
+        })
+    })
+</script>
+{% endblock %}

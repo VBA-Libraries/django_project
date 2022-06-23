@@ -1,0 +1,29 @@
+{% extends "expense/expense_base.html" %}
+
+{% block content %}
+
+
+<div class="card" style="max-width: 18rem;">
+    <div class="card-header bg-success text-white mb-3">
+        <button class="btn btn-link text-white" data-toggle="collapse" data-target="#b1">
+            {{ object.item_name}}
+        </button>
+    </div>
+    <div id="b1" class="card-body collapse show">
+        <ul>
+            <li>
+                Category: {{object.item_category}}
+            </li>
+            <li>
+                Amount: {{object.item_amount}}
+            </li>
+            <li>
+                Date: {{object.expense_date}}
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+
+{% endblock %}

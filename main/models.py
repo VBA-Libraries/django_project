@@ -10,8 +10,12 @@ class Category(models.Model):
     title = models.TextField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     altText = models.TextField(null=True, blank=True)
-    squareImage = ResizedImageField(size=[1000, 1000], crop=[
-                                    'middle', 'center'], default='default_square.jpg', upload_to='square')
+    squareImage = ResizedImageField(
+        size=[1000, 1000],
+        crop=["middle", "center"],
+        default="default_square.jpg",
+        upload_to="square",
+    )
 
     # Utility Variable
     uniqueId = models.TextField(null=True, blank=True)
@@ -20,19 +24,19 @@ class Category(models.Model):
     last_updated = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return '{} {}'.format(self.title, self.uniqueId)
+        return "{} {}".format(self.title, self.uniqueId)
 
     def get_absolute_url(self):
-        return reverse('category-detail', kwargs={'slug': self.slug})
+        return reverse("category-detail", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
         if self.date_created is None:
             self.date_created = timezone.localtime(timezone.now())
         if self.uniqueId is None:
-            self.uniqueId = str(uuid4()).split('-')[4]
-            self.slug = slugify('{} {}'.format(self.title, self.uniqueId))
+            self.uniqueId = str(uuid4()).split("-")[4]
+            self.slug = slugify("{} {}".format(self.title, self.uniqueId))
 
-        self.slug = slugify('{} {}'.format(self.title, self.uniqueId))
+        self.slug = slugify("{} {}".format(self.title, self.uniqueId))
         self.last_updated = timezone.localtime(timezone.now())
         super(Category, self).save(*args, **kwargs)
 
@@ -43,16 +47,29 @@ class Image(models.Model):
     hashtags = models.TextField(null=True, blank=True)
 
     # ImageFields
-    squareImage = ResizedImageField(size=[1000, 1000], crop=[
-                                    'middle', 'center'], default='default_square.jpg', upload_to='square')
-    landImage = ResizedImageField(size=[2878, 1618], crop=[
-                                  'middle', 'center'], default='default_land.jpg', upload_to='landscape')
-    tallImage = ResizedImageField(size=[1618, 2878], crop=[
-                                  'middle', 'center'], default='default_tall.jpg', upload_to='tall')
+    squareImage = ResizedImageField(
+        size=[1000, 1000],
+        crop=["middle", "center"],
+        default="default_square.jpg",
+        upload_to="square",
+    )
+    landImage = ResizedImageField(
+        size=[2878, 1618],
+        crop=["middle", "center"],
+        default="default_land.jpg",
+        upload_to="landscape",
+    )
+    tallImage = ResizedImageField(
+        size=[1618, 2878],
+        crop=["middle", "center"],
+        default="default_tall.jpg",
+        upload_to="tall",
+    )
 
     # Related Fiels
     category = models.ForeignKey(
-        Category, null=True, blank=True, on_delete=models.CASCADE)
+        Category, null=True, blank=True, on_delete=models.CASCADE
+    )
 
     # Utility Variable
     uniqueId = models.TextField(null=True, blank=True)
@@ -61,19 +78,18 @@ class Image(models.Model):
     last_updated = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return '{} {}'.format(self.category.title, self.uniqueId)
+        return "{} {}".format(self.category.title, self.uniqueId)
 
     def get_absolute_url(self):
-        return reverse('image-detail', kwargs={'slug': self.slug})
+        return reverse("image-detail", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
         if self.date_created is None:
             self.date_created = timezone.localtime(timezone.now())
         if self.uniqueId is None:
-            self.uniqueId = str(uuid4()).split('-')[4]
-            self.slug = slugify('{} {}'.format(
-                self.category.title, self.uniqueId))
+            self.uniqueId = str(uuid4()).split("-")[4]
+            self.slug = slugify("{} {}".format(self.category.title, self.uniqueId))
 
-        self.slug = slugify('{} {}'.format(self.category.title, self.uniqueId))
+        self.slug = slugify("{} {}".format(self.category.title, self.uniqueId))
         self.last_updated = timezone.localtime(timezone.now())
         super(Image, self).save(*args, **kwargs)
